@@ -53,8 +53,17 @@ function getAPI(request){
             weatherIcon.src = "https://openweathermap.org/img/wn/50d@2x.png"
             
           }
-    
       });
+      
+      fetch(forecastURL).then(function(response) {
+        console.log(response.status);
+        return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+        });
+
+      
     }
 
     //Function for the button
