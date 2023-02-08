@@ -12,7 +12,7 @@ var userInput = document.querySelector('.form-control');
 var buttonClick = $('#button-addon2');
 
 
-//Function to call current weather
+//Function to call API
 function getAPI(request){
     fetch(weatherURL).then(function(response) {
         console.log(response.status);
@@ -53,14 +53,19 @@ function getAPI(request){
             weatherIcon.src = "https://openweathermap.org/img/wn/50d@2x.png"
             
           }
+          if (data.weather[0].main === "Smoke"){            
+            weatherIcon.src = "https://openweathermap.org/img/wn/50d@2x.png"
+            
+          }
       });
-      
+
       fetch(forecastURL).then(function(response) {
         console.log(response.status);
         return response.json();
         })
         .then(function(data) {
-            console.log(data);
+            console.log(data.list[0].main);
+
         });
 
       
