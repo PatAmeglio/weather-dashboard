@@ -57,10 +57,22 @@ function getAPI(request){
       });
     }
 
+    //Function for the button
     buttonClick.on('click', function(){
-        cityName = userInput.value;
+        var cityName = userInput.value;
         weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=18610a725e2190ffc5e7027c25ec7a3b&units=imperial";
         forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=18610a725e2190ffc5e7027c25ec7a3b&units=imperial";
-        getAPI();
-    });
+        
+        fetch(weatherURL)
+          .then(response => response.json())
+          .then(data => {
+            if (data.cod !== 200) {
+              window.alert("That city was not found. Please try again");
+              return;
+            }
+      
+            getAPI();
+          });
+      });
+      
     
