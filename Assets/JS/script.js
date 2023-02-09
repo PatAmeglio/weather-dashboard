@@ -21,6 +21,9 @@ function getAPI(request){
         console.log(data.main.humidity);
         console.log(data.wind.speed);
 
+        cityName = data.name;
+        iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
         var weatherContainer = document.querySelector('.weather-container');
         weatherContainer.innerHTML= "";
         
