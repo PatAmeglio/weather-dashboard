@@ -24,10 +24,27 @@ function getAPI(request){
         console.log(data.main.humidity);
         console.log(data.wind.speed);
 
-        currentDate.textContent = today.format('MMM D, YYYY');
-        temperature.textContent = ('Temperature: ' + data.main.temp + '°F')
-        humidity.textContent = ('Humidity: ' + data.main.humidity + '%')
-        windSpeed.textContent = ('Wind Speed: ' + data.wind.speed + ' mph')
+        var weatherContainer = document.querySelector('.weather-container');
+        weatherContainer.innerHTML= "";
+        
+        var weatherCard = document.createElement('div');
+              weatherCard.classList.add('card');
+              weatherCard.innerHTML = `
+              <div class="card-body">
+                <h5 class="card-title">${dayjs(today).format('MMM D, h:mm a')}</h5>
+                <p class="card-text">Temperature: ${data.main.temp}°F</p>
+                <p class="card-text">Humidity: ${data.main.humidity}%</p>
+                <p class="card-text">Wind Speed: ${data.wind.speed} mph</p>
+              </div>
+            `;
+
+                weatherContainer.appendChild(weatherCard);
+            
+
+        //currentDate.textContent = today.format('MMM D, YYYY');
+        //temperature.textContent = ('Temperature: ' + data.main.temp + '°F')
+        //humidity.textContent = ('Humidity: ' + data.main.humidity + '%')
+        //windSpeed.textContent = ('Wind Speed: ' + data.wind.speed + ' mph')
 
         if (data.weather[0].main === "Clear"){            
             weatherIcon.src = "https://openweathermap.org/img/wn/01d@2x.png"
