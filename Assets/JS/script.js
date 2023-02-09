@@ -7,6 +7,23 @@ var iconURL;
 var userInput = document.querySelector('.form-control');
 var buttonClick = $('#button-addon2');
 
+//Function to store the search history in local storage
+function storeSearchHistory(city) {
+  var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+  searchHistory.unshift(city);
+
+  if (searchHistory.length > 5) {
+    searchHistory.pop();
+  }
+
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+}
+
+// Function to retrieve the search history from local storage
+function getSearchHistory() {
+  return JSON.parse(localStorage.getItem('searchHistory')) || [];
+}
+
 
 //Function to call API
 function getAPI(request){
