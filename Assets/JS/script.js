@@ -4,26 +4,30 @@ var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userIn
 var today = dayjs();
 var cityName;
 var iconURL;
+var searchHistory = [];
 var userInput = document.querySelector('.form-control');
 var buttonClick = $('#button-addon2');
 
-//Function to store the search history in local storage
-function storeSearchHistory(city) {
-  var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-  searchHistory.unshift(city);
 
-  if (searchHistory.length > 5) {
-    searchHistory.pop();
-  }
-
-  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-}
-
-// Function to retrieve the search history from local storage
-function getSearchHistory() {
-  return JSON.parse(localStorage.getItem('searchHistory')) || [];
-}
-
+    //Function for the button
+    buttonClick.on('click', function(){
+      var cityName = userInput.value;
+      weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=18610a725e2190ffc5e7027c25ec7a3b&units=imperial";
+      forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=18610a725e2190ffc5e7027c25ec7a3b&units=imperial";
+      
+      fetch(weatherURL)
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod !== 200) {
+            window.alert("That city was not found. Please try again");
+            return;
+          }
+    
+          getAPI();
+          userInput.value ="";
+        });
+    });
+    
 
 //Function to call API
 function getAPI(request){
@@ -32,7 +36,6 @@ function getAPI(request){
         return response.json();
     })
     .then(function (data) {
-        console.log(data);
         console.log(data.main.temp);
         console.log(data.weather[0].main);
         console.log(data.main.humidity);
@@ -123,22 +126,4 @@ function getAPI(request){
       
     }
 
-    //Function for the button
-    buttonClick.on('click', function(){
-        var cityName = userInput.value;
-        weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=18610a725e2190ffc5e7027c25ec7a3b&units=imperial";
-        forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=18610a725e2190ffc5e7027c25ec7a3b&units=imperial";
-        
-        fetch(weatherURL)
-          .then(response => response.json())
-          .then(data => {
-            if (data.cod !== 200) {
-              window.alert("That city was not found. Please try again");
-              return;
-            }
-      
-            getAPI();
-          });
-      });
-      
     
