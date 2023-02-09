@@ -4,7 +4,7 @@ var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userIn
 var today = dayjs();
 var cityName;
 var iconURL;
-var searchHistory = [];
+var searchHistory = document.querySelector('.search-history');
 var userInput = document.querySelector('.form-control');
 var buttonClick = $('#button-addon2');
 
@@ -25,8 +25,34 @@ var buttonClick = $('#button-addon2');
     
           getAPI();
           userInput.value ="";
+
+          var history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+      history.unshift(cityName);
+      if (history.length > 5) {
+        history.pop();
+      }
+      localStorage.setItem("searchHistory", JSON.stringify(history));
+      displaySearchHistory();
+
         });
     });
+
+    function displaySearchHistory() {
+      var history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+      searchHistory.innerHTML = "";
+      history.forEach(city => {
+        var cityEl = document.createElement("div");
+        cityEl.classList.add('card');
+        cityEl.innerHTML = city;
+        cityEl.addEventListener("click", function(){
+          userInput.value = city;
+          buttonClick.click();
+        });
+        searchHistory.appendChild(cityEl);
+      });
+    }
+    
+    displaySearchHistory();
     
 
 //Function to call API
@@ -122,8 +148,6 @@ function getAPI(request){
             }
         });
 
-
-      
     }
 
     

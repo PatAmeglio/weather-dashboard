@@ -24,3 +24,15 @@ h1 {
     justify-content: space-evenly;
     margin: 25px;
 }
+
+.search-history {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+.search-history:hover {
+    justify-content: center;
+    margin: 50px;
+    cursor:grab;
+}
