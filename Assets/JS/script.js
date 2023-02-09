@@ -60,13 +60,33 @@ function getAPI(request){
       });
 
       fetch(forecastURL).then(function(response) {
-        console.log(response.status);
         return response.json();
         })
         .then(function(data) {
-            console.log(data.list[0].main);
+            console.log(data.list[0].dt_txt);
+            console.log(data.list[0].main.temp);
+            console.log(data.list[0].main.humidity);
+            console.log(data.list[0].wind.speed);
+            
+            var forecastContainer = document.querySelector('.forecast-container');
+            forecastContainer.innerHTML = "";
 
+            for (var i = 7; i < data.list.length && i < 42; i += 7) {
+              var forecastCard = document.createElement('div');
+              forecastCard.classList.add('card');
+              forecastCard.innerHTML = `
+                <div class="card-body">
+                  <h5 class="card-title">${dayjs(data.list[i].dt_txt).format('MMM D, h:mm a')}</h5>
+                  <p class="card-text">Temperature: ${data.list[i].main.temp}°F</p>
+                  <p class="card-text">Humidity: ${data.list[i].main.humidity}%</p>
+                  <p class="card-text">Wind Speed: ${data.list[i].wind.speed} mph</p>
+                </div>
+              `;
+
+                forecastContainer.appendChild(forecastCard);
+            }
         });
+
 
       
     }

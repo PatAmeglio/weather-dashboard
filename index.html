@@ -14,7 +14,7 @@
       <div class="container"><h1>Weather Dashboard</h1>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Search by City Name" aria-label="Search by City Name" aria-describedby="button-addon2">
-          <button class="btn btn-secondary" type="submit" id="button-addon2">Button</button>
+          <button class="btn btn-secondary" type="submit" id="button-addon2">Search</button>
         </div>
       </div>    
     </header>
@@ -25,7 +25,6 @@
             <h2>Current Weather</h2>
             <img class="card-img-top">
             <div class="card-body"></div>
-            <div id="weather-icon"></div>
             <div id="date"></div>
             <div id="temperature"></div>
             <div id="humidity"></div>
@@ -34,75 +33,7 @@
         </div>
   
           <h2>5-Day Forecast</h2>
-            <div class="container d-flex justify-content-evenly">
-              <div class="row align-items-center">
-                <div class="col">
-                  <div class="card" style="width: 18rem;">
-                    <h2>Day 1</h2>
-                     <img class="card-img-top">
-                     <div class="card-body"></div>
-                     <div id="weather-icon"></div>
-                    <div id="date"></div>
-                    <div id="temperature"></div>
-                    <div id="humidity"></div>
-                    <div id="wind-speed"></div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card" style="width: 18rem;">
-                    <h2>Day 2</h2>
-                    <img class="card-img-top">
-                    <div class="card-body"></div>
-                    <div id="weather-icon"></div>
-                    <div id="date"></div>
-                    <div id="temperature"></div>
-                    <div id="humidity"></div>
-                    <div id="wind-speed"></div>
-                  </div>
-                </div>
-              </div>
-            </div> 
-
-            <div class="container d-flex justify-content-evenly">
-              <div class="row align-items-center">
-                <div class="col">
-                  <div class="card" style="width: 18rem;">
-                    <h2>Day 3</h2>
-                    <img class="card-img-top">
-                    <div class="card-body"></div>
-                    <div id="weather-icon"></div>
-                    <div id="date"></div>
-                    <div id="temperature"></div>
-                    <div id="humidity"></div>
-                    <div id="wind-speed"></div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card" style="width: 18rem;">
-                    <h2>Day 4</h2>
-                    <img class="card-img-top">
-                    <div class="card-body"></div>
-                    <div id="weather-icon"></div>
-                    <div id="date"></div>
-                    <div id="temperature"></div>
-                    <div id="humidity"></div>
-                    <div id="wind-speed"></div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card" style="width: 18rem;">
-                    <h2>Day 5</h2>
-                    <img class="card-img-top">
-                    <div class="card-body"></div>
-                    <div id="weather-icon"></div>
-                    <div id="date"></div>
-                    <div id="temperature"></div>
-                    <div id="humidity"></div>
-                    <div id="wind-speed"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="forecast-container"></div>
 
         <section class="search-history">
           <h2>Search History</h2>

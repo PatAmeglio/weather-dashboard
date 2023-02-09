@@ -12,3 +12,8 @@ h1 {
 .d-flex {
     margin-bottom: 40px;
 }
+
+.forecast-container {
+    display: flex;
+    justify-content: space-evenly;
+}
