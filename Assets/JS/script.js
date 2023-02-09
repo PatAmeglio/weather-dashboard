@@ -3,11 +3,7 @@ var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userIn
 
 var today = dayjs();
 var cityName;
-var currentDate = document.getElementById('date');
-var temperature = document.getElementById('temperature');
-var weatherIcon = document.querySelector('.card-img-top');
-var humidity = document.getElementById('humidity');
-var windSpeed = document.getElementById('wind-speed');
+var iconURL;
 var userInput = document.querySelector('.form-control');
 var buttonClick = $('#button-addon2');
 
@@ -19,6 +15,7 @@ function getAPI(request){
         return response.json();
     })
     .then(function (data) {
+        console.log(data);
         console.log(data.main.temp);
         console.log(data.weather[0].main);
         console.log(data.main.humidity);
@@ -31,7 +28,8 @@ function getAPI(request){
               weatherCard.classList.add('card');
               weatherCard.innerHTML = `
               <div class="card-body">
-                <h5 class="card-title">${dayjs(today).format('MMM D, h:mm a')}</h5>
+              <h5 class="card-title">${cityName} ${dayjs(today).format('MMM D, YY')}</h5>
+                <img src="${iconURL}" alt="Weather Icon" style="float: left; width: 50px; height: 50px; margin-right: 10px;">
                 <p class="card-text">Temperature: ${data.main.temp}°F</p>
                 <p class="card-text">Humidity: ${data.main.humidity}%</p>
                 <p class="card-text">Wind Speed: ${data.wind.speed} mph</p>
@@ -39,43 +37,39 @@ function getAPI(request){
             `;
 
                 weatherContainer.appendChild(weatherCard);
-            
+    
 
-        //currentDate.textContent = today.format('MMM D, YYYY');
-        //temperature.textContent = ('Temperature: ' + data.main.temp + '°F')
-        //humidity.textContent = ('Humidity: ' + data.main.humidity + '%')
-        //windSpeed.textContent = ('Wind Speed: ' + data.wind.speed + ' mph')
-
-        if (data.weather[0].main === "Clear"){            
-            weatherIcon.src = "https://openweathermap.org/img/wn/01d@2x.png"
+            if (data.weather[0].main === "Clear"){            
+            iconURL = "https://openweathermap.org/img/wn/01d@2x.png"
             
-          }
-          if (data.weather[0].main === "Clouds"){            
-            weatherIcon.src = "https://openweathermap.org/img/wn/02d@2x.png"
+            }
+            if (data.weather[0].main === "Clouds"){            
+            iconURL = "https://openweathermap.org/img/wn/02d@2x.png"
             
-          }
-          if (data.weather[0].main === "Rain"){            
-            weatherIcon.src = "https://openweathermap.org/img/wn/10d@2x.png"
+            }
+            if (data.weather[0].main === "Rain"){            
+            iconURL = "https://openweathermap.org/img/wn/10d@2x.png"
             
-          }
-          if (data.weather[0].main === "Thunderstorm"){            
-            weatherIcon.src = "https://openweathermap.org/img/wn/11d@2x.png"
+            }
+            if (data.weather[0].main === "Thunderstorm"){            
+            iconURL = "https://openweathermap.org/img/wn/11d@2x.png"
             
-          }
-          if (data.weather[0].main === "Snow"){            
-            weatherIcon.src = "https://openweathermap.org/img/wn/13d@2x.png"
+            }
+            if (data.weather[0].main === "Snow"){            
+            iconURL = "https://openweathermap.org/img/wn/13d@2x.png"
             
-          }
-          if (data.weather[0].main === "Mist"){            
-            weatherIcon.src = "https://openweathermap.org/img/wn/50d@2x.png"
+            }  
+            if (data.weather[0].main === "Mist"){            
+            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
             
-          }
-          if (data.weather[0].main === "Smoke"){            
-            weatherIcon.src = "https://openweathermap.org/img/wn/50d@2x.png"
+            }
+            if (data.weather[0].main === "Smoke"){            
+            iconURL = "https://openweathermap.org/img/wn/50d@2x.png"
             
-          }
+            }
       });
 
+      
       fetch(forecastURL).then(function(response) {
         return response.json();
         })
@@ -93,7 +87,8 @@ function getAPI(request){
               forecastCard.classList.add('card');
               forecastCard.innerHTML = `
                 <div class="card-body">
-                  <h5 class="card-title">${dayjs(data.list[i].dt_txt).format('MMM D, h:mm a')}</h5>
+                  <img src="${iconURL}" alt="Weather Icon" style="float: left; width: 50px; height: 50px; margin-right: 10px;">
+                  <h5 class="card-title">${dayjs(data.list[i].dt_txt).format('MMM D, YY')}</h5>
                   <p class="card-text">Temperature: ${data.list[i].main.temp}°F</p>
                   <p class="card-text">Humidity: ${data.list[i].main.humidity}%</p>
                   <p class="card-text">Wind Speed: ${data.list[i].wind.speed} mph</p>
